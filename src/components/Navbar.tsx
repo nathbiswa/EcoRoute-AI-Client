@@ -16,7 +16,7 @@ const Navbar = () => {
 
     const mainLinks = [
         { name: 'Home', href: '/', icon: <HomeIcon size={18} /> },
-        { name: 'Explore', href: '/#features', icon: <Compass size={18} /> },
+        { name: 'Explore', href: '/explore', icon: <Compass size={18} /> },
         { name: 'Add Items', href: '/items/add', icon: <PlusCircle size={18} /> },
         { name: 'Manage Items', href: '/items/manage', icon: <Settings size={18} /> },
         { name: 'Dashboard', href: '/dashboard', icon: <LayoutDashboard size={18} /> },

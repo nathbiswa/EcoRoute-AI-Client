@@ -24,11 +24,12 @@ const Features = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // Adjust backend URL as needed based on environment
-                const response = await axios.get('http://localhost:5000/api/products');
-                setProducts(response.data);
+                // Fetch latest 4 items for the featured section
+                const res = await axios.get('http://localhost:5000/api/products?limit=4');
+                const productsData = res.data.products ? res.data.products : res.data;
+                setProducts(productsData);
             } catch (error) {
-                console.error("Failed to fetch products:", error);
+                console.error("Error fetching products:", error);
             } finally {
                 setLoading(false);
             }
