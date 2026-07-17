@@ -10,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddItemPage = () => {
     const router = useRouter();
-    const { data: session, isPending } = authClient.useSession();
+const { data: session, isPending } = authClient.useSession();
+const token = (session as any)?.accessToken ?? (session as any)?.access_token ?? "";
 
 
 
@@ -45,33 +46,22 @@ const AddItemPage = () => {
         setLoading(true);
         setError('');
         setSuccess('');
-
+        // Derive token from session (if any)
+        const token = (session as any)?.accessToken ?? (session as any)?.access_token;
+        const headers: any = {};
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
         try {
-            // Fetch a signed JWT from our custom Next.js API route
-            // This route reads the Better Auth session (via cookie) and signs a JWT using jose
-            const tokenRes = await fetch('/api/token');
-            if (!tokenRes.ok) {
-                throw new Error("Session expired. Please log in again.");
-            }
-            const { token } = await tokenRes.json();
-
-            if (!token) {
-                throw new Error("Failed to retrieve authentication token.");
-            }
-
+            // Direct POST to backend (no JWT needed but include if present)
             const response = await axios.post('http://localhost:5000/api/products', {
                 title,
-                shortDescription,
                 description: `${shortDescription}\n\n${description}`,
                 price: Number(price),
                 date,
                 location,
                 image
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            }, { headers });
 
             const successMsg = "Item successfully added to the marketplace!";
             setSuccess(successMsg);
