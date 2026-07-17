@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Leaf, LayoutDashboard, PlusCircle, Ship, BarChart3, LogOut, User } from 'lucide-react';
+import { Menu, X, Leaf, PlusCircle, LogOut, User, Home as HomeIcon, Compass, Settings, Info, Phone, BookOpen, LifeBuoy, Shield, ChevronDown, MoreHorizontal, LayoutDashboard } from 'lucide-react';
 import { authClient } from '../lib/auth-client';
 
 const Navbar = () => {
@@ -14,11 +14,20 @@ const Navbar = () => {
     const user = session?.user;
     const isLoggedIn = !!user;
 
-    const loggedInLinks = [
+    const mainLinks = [
+        { name: 'Home', href: '/', icon: <HomeIcon size={18} /> },
+        { name: 'Explore', href: '/#features', icon: <Compass size={18} /> },
+        { name: 'Add Items', href: '/items/add', icon: <PlusCircle size={18} /> },
+        { name: 'Manage Items', href: '/items/manage', icon: <Settings size={18} /> },
         { name: 'Dashboard', href: '/dashboard', icon: <LayoutDashboard size={18} /> },
-        { name: 'Optimize', href: '/items/add', icon: <PlusCircle size={18} /> },
-        { name: 'Fleet', href: '/items/manage', icon: <Ship size={18} /> },
-        { name: 'Analytics', href: '/analytics', icon: <BarChart3 size={18} /> },
+    ];
+
+    const dropdownLinks = [
+        { name: 'About', href: '/about', icon: <Info size={18} /> },
+        { name: 'Contact', href: '/contact', icon: <Phone size={18} /> },
+        { name: 'Blogs', href: '/blogs', icon: <BookOpen size={18} /> },
+        { name: 'Support', href: '/support', icon: <LifeBuoy size={18} /> },
+        { name: 'Privacy', href: '/privacy', icon: <Shield size={18} /> },
     ];
 
     const handleLogOut = async () => {
@@ -26,7 +35,6 @@ const Navbar = () => {
         window.location.href = "/auth/login";
     };
 
-    // সাধারণ লিঙ্কের জন্য একটিভ ক্লাস (Home, About)
     const getLinkClass = (path: string) => {
         return pathname === path
             ? "text-emerald-400 font-bold border-b-2 border-emerald-400 pb-1 transition-all"
@@ -54,7 +62,7 @@ const Navbar = () => {
                                     <Link href="/" className={getLinkClass('/')}>Home</Link>
                                     <Link href="/about" className={getLinkClass('/about')}>About</Link>
 
-                                    {/* Login Button - Active State Highlights with Border */}
+                                    {/* Login Button */}
                                     <Link
                                         href="/auth/login"
                                         className={`px-5 py-2 rounded-lg font-medium transition-all border ${pathname === '/auth/login'
@@ -65,7 +73,7 @@ const Navbar = () => {
                                         Login
                                     </Link>
 
-                                    {/* Register Button - Active State turns White */}
+                                    {/* Register Button */}
                                     <Link
                                         href="/auth/register"
                                         className={`px-5 py-2 rounded-lg font-medium transition-all shadow-md border border-transparent ${pathname === '/auth/register'
@@ -78,7 +86,8 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div className="flex items-center space-x-5">
-                                    {loggedInLinks.map((link) => (
+                                    {/* Main Links */}
+                                    {mainLinks.map((link) => (
                                         <Link
                                             key={link.name}
                                             href={link.href}
@@ -89,6 +98,27 @@ const Navbar = () => {
                                             {link.name}
                                         </Link>
                                     ))}
+
+                                    {/* Dropdown for More Links */}
+                                    <div className="relative group">
+                                        <button className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors py-2">
+                                            <MoreHorizontal size={18} />
+                                            More
+                                            <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+                                        </button>
+                                        <div className="absolute top-full right-0 mt-0 w-48 bg-slate-900 border border-slate-700 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col py-2 translate-y-2 group-hover:translate-y-0">
+                                            {dropdownLinks.map((link) => (
+                                                <Link
+                                                    key={link.name}
+                                                    href={link.href}
+                                                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${pathname === link.href ? 'text-emerald-400 bg-slate-800' : 'text-slate-300 hover:text-emerald-400 hover:bg-slate-800'}`}
+                                                >
+                                                    {link.icon}
+                                                    {link.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
 
                                     {/* User Profile */}
                                     <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
@@ -125,7 +155,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden bg-slate-900/98 backdrop-blur-xl border-b border-emerald-500/20 px-4 pb-8 pt-4 space-y-3 animate-in slide-in-from-top duration-300">
+                <div className="md:hidden bg-slate-900/98 backdrop-blur-xl border-b border-emerald-500/20 px-4 pb-8 pt-4 space-y-3 animate-in slide-in-from-top duration-300 h-[calc(100vh-64px)] overflow-y-auto">
                     {!isLoggedIn ? (
                         <>
                             <Link href="/" onClick={() => setIsOpen(false)} className={`block py-3 text-lg ${pathname === '/' ? 'text-emerald-400 font-bold' : ''}`}>Home</Link>
@@ -138,12 +168,12 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            {loggedInLinks.map((link) => (
-                                <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className={`flex items-center gap-3 py-4 border-b border-slate-800/50 ${pathname === link.href ? 'text-emerald-400 font-bold' : 'text-slate-300'}`}>
+                            {[...mainLinks, ...dropdownLinks].map((link) => (
+                                <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className={`flex items-center gap-3 py-3 border-b border-slate-800/50 ${pathname === link.href ? 'text-emerald-400 font-bold' : 'text-slate-300'}`}>
                                     {link.icon} {link.name}
                                 </Link>
                             ))}
-                            <button onClick={handleLogOut} className="flex items-center gap-3 py-4 text-red-400 w-full font-medium">
+                            <button onClick={handleLogOut} className="flex items-center gap-3 py-4 mt-4 text-red-400 w-full font-medium border-t border-slate-800/50">
                                 <LogOut size={18} /> Logout Session
                             </button>
                         </>
