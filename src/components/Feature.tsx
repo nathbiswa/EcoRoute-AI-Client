@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Calendar, Star, DollarSign } from 'lucide-react';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface Product {
     _id: string;
@@ -128,9 +129,11 @@ const Features = () => {
                                     </div>
 
                                     {/* Action Button */}
-                                    <button className="w-full py-2.5 mt-auto bg-slate-800/50 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 font-semibold rounded-lg transition-all duration-300 text-sm border border-slate-700 hover:border-transparent">
-                                        View Details
-                                    </button>
+                                    <Link href={`/product/${product._id}`} className="w-full block mt-auto">
+                                        <button className="w-full py-2.5 bg-slate-800/50 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 font-semibold rounded-lg transition-all duration-300 text-sm border border-slate-700 hover:border-transparent">
+                                            View Details
+                                        </button>
+                                    </Link>
                                 </div>
                             </motion.div>
                         ))
