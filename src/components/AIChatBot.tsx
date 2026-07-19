@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from '../lib/config';
 
 interface Message {
     role: 'user' | 'model';
@@ -37,7 +38,7 @@ const AIChatBot = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/ai/chat', {
+            const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

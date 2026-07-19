@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useSession } from '../../../lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../../../lib/config';
 
 interface Product {
     _id: string;
@@ -36,7 +37,7 @@ export default function ManageItemsPage() {
     const { data: products, isLoading } = useQuery<Product[]>({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/api/products');
+            const res = await fetch(`${API_BASE_URL}/api/products`);
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
             return data.products || data;
@@ -46,7 +47,7 @@ export default function ManageItemsPage() {
 
     const deleteMutation = useMutation({
         mutationFn: async (id: string) => {
-            const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+            const res = await fetch(`${API_BASE_URL}/api/products/${id}`, {
                 method: 'DELETE',
             });
             if (!res.ok) throw new Error('Failed to delete product');

@@ -20,15 +20,20 @@ await client.connect().catch((err) => {
 // Target the EcoRouteAI database
 const db = client.db("EcoRouteAI");
 
+const appUrl = process.env.BETTER_AUTH_URL || "http://localhost:3000";
+
 export const auth = betterAuth({
   // Required: must match BETTER_AUTH_URL in .env
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseURL: appUrl,
 
   // Required: secret for signing tokens/sessions
   secret: process.env.BETTER_AUTH_SECRET,
 
-  // Allow requests from the frontend origin
-  trustedOrigins: ["http://localhost:3000"],
+  // Allow requests from the frontend origin (both local and production)
+  trustedOrigins: [
+    "http://localhost:3000",
+    ...(process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : []),
+  ],
 
   emailAndPassword: {
     enabled: true,

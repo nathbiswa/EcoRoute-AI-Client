@@ -19,6 +19,7 @@ import {
 } from 'recharts';
 import { Package, DollarSign, Activity, Star } from 'lucide-react';
 import Image from 'next/image';
+import { API_BASE_URL } from '../../lib/config';
 
 interface Product {
     _id: string;
@@ -47,7 +48,7 @@ export default function DashboardPage() {
     const { data: products, isLoading } = useQuery<Product[]>({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/api/products');
+            const res = await fetch(`${API_BASE_URL}/api/products`);
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
             return data.products || data;

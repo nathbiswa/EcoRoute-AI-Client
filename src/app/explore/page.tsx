@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, Filter, SlidersHorizontal, MapPin, Calendar, Star, DollarSign, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { API_BASE_URL } from '../../lib/config';
 
 interface Product {
     _id: string;
@@ -50,7 +51,7 @@ const ExplorePage = () => {
                 ...(maxPrice && { maxPrice })
             });
 
-            const res = await axios.get(`http://localhost:5000/api/products?${queryParams}`);
+            const res = await axios.get(`${API_BASE_URL}/api/products?${queryParams}`);
             setProducts(res.data.products);
             setTotalPages(res.data.pagination.totalPages || 1);
         } catch (error) {

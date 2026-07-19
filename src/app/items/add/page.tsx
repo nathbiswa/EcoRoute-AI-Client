@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Leaf, PlusCircle, AlertCircle, CheckCircle, Package, Calendar, DollarSign, MapPin, Image as ImageIcon } from 'lucide-react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { API_BASE_URL } from '../../../lib/config';
 
 const AddItemPage = () => {
     const router = useRouter();
@@ -54,7 +55,7 @@ const token = (session as any)?.accessToken ?? (session as any)?.access_token ??
         }
         try {
             // Direct POST to backend (no JWT needed but include if present)
-            const response = await axios.post('http://localhost:5000/api/products', {
+            const response = await axios.post(`${API_BASE_URL}/api/products`, {
                 title,
                 description: `${shortDescription}\n\n${description}`,
                 price: Number(price),

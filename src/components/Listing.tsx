@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Star, MapPin, Calendar, DollarSign, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { API_BASE_URL } from '../lib/config';
 
 // TypeScript Interface for Product
 interface Product {
@@ -43,7 +44,7 @@ const Listing = () => {
     const { data: products, isLoading } = useQuery<Product[]>({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/api/products?limit=4');
+            const res = await fetch(`${API_BASE_URL}/api/products?limit=4`);
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
             return data.products || data;
