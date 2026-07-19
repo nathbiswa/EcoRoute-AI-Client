@@ -43,7 +43,7 @@ const Listing = () => {
     const { data: products, isLoading } = useQuery<Product[]>({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/api/products');
+            const res = await fetch('http://localhost:5000/api/products?limit=4');
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
             return data.products || data;
@@ -68,10 +68,10 @@ const Listing = () => {
                 {/* Grid System - Requirement: 4 cards per row on desktop */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {isLoading ? (
-                        // লোড হওয়ার সময় ৮টি স্কেলিটন দেখানো
-                        Array(8).fill(0).map((_, i) => <CardSkeleton key={i} />)
+                        // লোড হওয়ার সময় ৪টি স্কেলিটন দেখানো
+                        Array(4).fill(0).map((_, i) => <CardSkeleton key={i} />)
                     ) : (
-                        products?.map((item) => (
+                        products?.slice(0, 4).map((item) => (
                             <motion.div
                                 key={item._id}
                                 initial={{ opacity: 0, scale: 0.95 }}

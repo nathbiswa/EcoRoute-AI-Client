@@ -36,6 +36,27 @@ const Stats = () => {
         <section className="py-20 bg-slate-900 border-y border-slate-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
+                {/* Section Header */}
+                <div className="text-center mb-16">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-emerald-500 font-bold tracking-widest uppercase text-sm"
+                    >
+                        Our Impact
+                    </motion.h2>
+                    <motion.h3
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="mt-3 text-3xl md:text-4xl font-extrabold text-white"
+                    >
+                        Global <span className="text-emerald-500">Statistics</span>
+                    </motion.h3>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {stats.map((stat, index) => (
                         <motion.div

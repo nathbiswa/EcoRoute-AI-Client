@@ -1,3 +1,4 @@
+import AIReasoning from "../components/AIReasoning";
 import CTA from "../components/CTA";
 import Features from "../components/Feature";
 import Hero from "../components/Hero";
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Listing />
+      <AIReasoning />
       <Stats />
       <HowItWorks />
       <Testimonials />
