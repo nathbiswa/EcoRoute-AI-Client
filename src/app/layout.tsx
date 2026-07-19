@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import QueryProvider from "./QueryProvider";
 import { ToastContainer } from "react-toastify";
 import Footer from "../components/Footer";
+import AIChatBot from "../components/AIChatBot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ToastContainer />
+        <AIChatBot />
       </body>
     </html>
   );
