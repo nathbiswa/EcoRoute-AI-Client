@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌿 EcoRoute AI - Scaling Green Logistics with Agentic AI
 
-## Getting Started
+EcoRoute AI is a production-ready, Full Stack Agentic AI application designed to optimize global supply chains for sustainability. By leveraging autonomous AI agents, the platform helps businesses find the most carbon-efficient shipping routes, provides smart recommendations, and offers a context-aware AI assistant.
 
-First, run the development server:
+## 🚀 Live Links
 
+- **Frontend (Client):** [https://eco-insight-client.vercel.app](https://eco-insight-client.vercel.app)
+- **Backend (Server):** [https://eco-insight-server.vercel.app](https://eco-insight-server.vercel.app)
+
+## 📂 Repositories
+
+- **Frontend Repo:** [https://github.com/nathbiswa/EcoRoute-AI-Client](https://github.com/nathbiswa/EcoRoute-AI-Client)
+- **Backend Repo:** [https://github.com/nathbiswa/EcoRoute-AI-Server](https://github.com/nathbiswa/EcoRoute-AI-Server)
+
+---
+
+## ✨ Key Features
+
+### 🤖 Agentic AI Implementation (Requirement #11)
+- **AI Smart Recommendation Engine:** Analyzes user budget and carbon saving goals to suggest the most sustainable global routes from our MongoDB database using Google Gemini AI.
+- **AI Chat Assistant:** A persistent, context-aware floating assistant that remembers conversation history and provides reasoning-based answers regarding green logistics.
+
+### 💻 Full Stack Capabilities
+- **Authentication System:** Secure login/registration via **Better Auth**, supporting Google Social Login and Email/Password with a "Demo Login" feature.
+- **Dynamic Marketplace:** A core listing section fetching 12+ real-time eco-routes from MongoDB with skeleton loaders for optimized UX.
+- **Responsive Dashboard:** Fully optimized for Mobile, Tablet, and Desktop following a strict 3-color professional palette (Emerald, Slate, White).
+
+### 🎨 Design & UI (Requirement #3)
+- **9 Meaningful Sections:** Hero, Features, Live Listing, AI Reasoning Lab, Statistics, How It Works, Testimonials, FAQ, and CTA.
+- **Consistency:** Uniform border radius, spacing, and layout across all components and cards.
+
+---
+
+## 🛠️ Technology Stack
+
+**Frontend:**
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript (Mandatory)
+- **Styling:** Tailwind CSS
+- **State & Data:** TanStack Query (React Query)
+- **Animations:** Framer Motion & Lucide Icons
+
+**Backend:**
+- **Environment:** Node.js with Express.js
+- **Language:** TypeScript
+- **Database:** MongoDB (via Mongoose)
+- **Auth:** Better Auth (with Google OAuth)
+- **AI Engine:** Google Gemini AI (Generative AI SDK)
+
+---
+
+## ⚙️ Installation & Setup
+
+To run this project locally in your **Antigravity IDE** or any environment:
+
+### 1. Clone the Repositories
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/nathbiswa/EcoRoute-AI-Client.git
+git clone https://github.com/nathbiswa/EcoRoute-AI-Server.git
